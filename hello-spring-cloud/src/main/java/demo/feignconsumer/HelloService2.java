@@ -11,7 +11,7 @@ import demo.api.User;
 
 /**
  * created by zhangyuxi on 2019年7月13日
- * 为了测试是否传实体可以用map接收
+ * 证明接口本身的名字不重要，服务提供者用map接收也没问题
  */
 @FeignClient("provider-one")
 public interface HelloService2 {
