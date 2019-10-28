@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="demo.springannotation.StudentDao">
+	<!--
+	create table student(id int,name varchar(100));
+	-->
+  <select id="selectOne" resultType="demo.basic.Student">
+    select * from student where id = #{id}
+  </select>
+  <select id="selectLike" resultType="demo.basic.Student">
+    select * from student where id like '%'||#{id}||'%'
+  </select>
+  <update id="updateOne" parameterType="demo.basic.Student">
+    update student set name=#{name} where id=#{id}
+  </update>
+  <update id="updateByRowid" parameterType="demo.basic.Student">
+    update student set name=#{name} where rowid=#{rowid, jdbcType=VARCHAR}
+  </update>
+  <insert id="insertOne" parameterType="demo.basic.Student">
+    insert into student values(#{id}, #{name})
+  </insert>
+  <delete id="deleteOne" parameterType="int">
+    delete from student where id=#{id}
+  </delete>
+  
+  <sql id="columns">
+  	id,name
+  </sql>
+  <select id="selectOne2" resultType="demo.basic.Student">
+    select <include refid="columns"/> from student where id = #{id}
+  </select>
+  <select id="selectHash" resultType="hashmap">
+    select <include refid="columns"/> from student where id = #{id}
+  </select>
+</mapper>
